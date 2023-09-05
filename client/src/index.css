@@ -3,12 +3,15 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
+    overflow: scroll;
   }
   
   .container {
-    width: 50vh;
+    width: 65vh;
     border-radius: 5px;
     border: 0.5px solid lightseagreen;
+    margin: 10px auto;
   }
   
   .login {
@@ -53,20 +56,21 @@ body {
 
 /* Card Component */
 .card {
-    height: 280px;
+    height: auto;
+    margin: 5px auto;
   }
   
   .info {
     display: flex;
     align-items: center;
     padding: 5px;
-    font-weight: 500;
+    font-weight: bold;
     font-size: 14px;
   }
   
   .userImg {
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     object-fit: cover;
     margin-right: 10px;
@@ -96,7 +100,9 @@ body {
       position: absolute;
       right: 0;
       width: 12px;
-      height: 12px;
+  }
+  .isLiked {
+    color: red;
   }
 
   /* Navbar */
@@ -127,23 +133,23 @@ body {
   }
   
   .iconImg {
-    width: 20px;
-    height: 20px;
+    font-size: 20px;
   }
   
   .counter {
-    width: 5px;
-    height: 5px;
+    width: 7px;
+    height: 7px;
     background-color: red;
     border-radius: 50%;
     padding: 5px;
-    font-size: 12px;
+    font-size: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: -5px;
+    top: -7px;
     right: -5px;
+    font-weight: bold;
   }
   
   .notifications {

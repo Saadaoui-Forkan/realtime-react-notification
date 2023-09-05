@@ -1,18 +1,33 @@
+import { useState } from "react";
 
-const Card = () => {
+const Card = ({ post, user }) => {
+  const [liked, setLiked] = useState(false);
+
+  const handleLike = () => {
+    liked ? setLiked(false) : setLiked(true);
+  }
 
   return (
     <div className="card">
       <div className="info">
-        <img src="https://images.pexels.com/photos/3497624/pexels-photo-3497624.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" className="userImg" />
-        <span>fullname</span>
+        <img
+          src={post.userImg}
+          alt=""
+          className="userImg"
+        />
+        <span>{post.fullname}</span>
       </div>
-      <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" className="postImg" />
+      <img
+        src="https://images.pexels.com/photos/9730025/pexels-photo-9730025.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+        alt=""
+        className="postImg"
+      />
       <div className="interaction">
-        <img src="https://images.pexels.com/photos/3497624/pexels-photo-3497624.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" className="cardIcon" />
-        <i className="fa-solid fa-heart cardIcon"></i>
-        <i className="fa-solid fa-comment cardIcon"></i>
-        <i className="fa-solid fa-share-nodes cardIcon"></i>
+        <i className={liked ? "fa-regular fa-heart cardIcon isLiked" : "fa-regular fa-heart cardIcon"}
+          onClick={handleLike}
+        ></i>        
+        <i className="fa-regular fa-comment cardIcon"></i>
+        <i className="fa-solid fa-arrow-up-right-from-square cardIcon"></i>
         <i className="fa-solid fa-circle-info cardIcon infoIcon"></i>
       </div>
     </div>
