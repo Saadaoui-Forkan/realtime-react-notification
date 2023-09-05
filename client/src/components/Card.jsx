@@ -1,11 +1,16 @@
 import { useState } from "react";
 
-const Card = ({ post, user }) => {
+const Card = ({ socket, post, user }) => {
   const [liked, setLiked] = useState(false);
 
-  const handleLike = () => {
-    liked ? setLiked(false) : setLiked(true);
-  }
+  const handleNotification = (type) => {
+    type === 1 && setLiked(true);
+    socket.emit("sendNotification", {
+      senderName: user,
+      receiverName: post.username,
+      type,
+    });
+  };
 
   return (
     <div className="card">
@@ -23,11 +28,25 @@ const Card = ({ post, user }) => {
         className="postImg"
       />
       <div className="interaction">
-        <i className={liked ? "fa-regular fa-heart cardIcon isLiked" : "fa-regular fa-heart cardIcon"}
-          onClick={handleLike}
-        ></i>        
-        <i className="fa-regular fa-comment cardIcon"></i>
-        <i className="fa-solid fa-arrow-up-right-from-square cardIcon"></i>
+        { 
+          liked 
+          ? 
+          (<i className= "fa-regular fa-heart cardIcon isLiked" 
+            onClick={()=>setLiked(false)}
+          ></i>) 
+          : 
+          (<i className= "fa-regular fa-heart cardIcon"
+            onClick={() => handleNotification(1)}
+          ></i>) 
+        }        
+        <i 
+          className="fa-regular fa-comment cardIcon"
+          onClick={() => handleNotification(2)}
+        ></i>
+        <i 
+          className="fa-solid fa-arrow-up-right-from-square cardIcon"
+          onClick={() => handleNotification(3)}
+        ></i>
         <i className="fa-solid fa-circle-info cardIcon infoIcon"></i>
       </div>
     </div>

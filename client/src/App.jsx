@@ -7,24 +7,29 @@ const { io } = require("socket.io-client");
 const App = () => {
   const [username, setUsername] = useState("");
   const [user, setUser] = useState("");
+  const [socket, setSocket] = useState(null)
   
   useEffect(()=>{
-    const socket = io("http://localhost:3001")
-    socket.on("firstEvent", (msg)=>{
-      console.log(msg)
-    })
+    setSocket(io("http://localhost:3001"))
   }, [])
+
+  useEffect(()=> {
+    socket?.emit("newUser", user)
+  }, [socket, user])
 
   return (
     <div className="container">
       {user ? (
         <>
-          <Navbar />
+          <Navbar 
+            socket = {socket}
+          />
           {posts.map((post) => (
             <Card 
               key={post.id} 
               post={post} 
               user={user}
+              socket = {socket}
             />
           ))}
           <span className="username">{user}</span>
